@@ -1,4 +1,4 @@
-
+import re
 import PyPDF2
 import requests
 from bs4 import BeautifulSoup
@@ -23,6 +23,8 @@ def extract_text_from_url(url):
 
 def clean_and_tokenize(text):
     text = text.lower()
+    text = re.sub(r"[^\w\s]", " ", text)
+    text = re.sub(r"\s+", " ", text).strip()
     tokens = text.split()
     return set(tokens)
 
